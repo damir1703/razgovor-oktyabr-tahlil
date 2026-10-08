@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Razgovor · разбор продаж</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--surface:#fff;--surface-2:#EDECE6;--border:#DBD9D1;--line-2:#C7C4BA;
+--t1:#141817;--t2:#47504E;--t3:#77807D;--accent:#7C3AED;--accent-2:#A855F7;
+--ok:#0FA968;--warn:#E5920B;--bad:#E5484D;--shadow:0 2px 10px rgba(60,50,40,.05);--r:20px;
+--sans:"Manrope",ui-sans-serif,system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121514;--surface:#191D1C;--surface-2:#212625;
+--border:#2A302F;--line-2:#3A423F;--t1:#ECECE7;--t2:#B0B8B6;--t3:#828B88;--accent:#A78BFA;--accent-2:#C4B5FD;
+--ok:#3ECF8E;--warn:#F2B23E;--bad:#F26D71;--shadow:0 2px 12px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--bg:#121514;--surface:#191D1C;--surface-2:#212625;--border:#2A302F;--line-2:#3A423F;
+--t1:#ECECE7;--t2:#B0B8B6;--t3:#828B88;--accent:#A78BFA;--accent-2:#C4B5FD;--ok:#3ECF8E;--warn:#F2B23E;--bad:#F26D71}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16.5px;line-height:1.62}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px 90px}.mono{font-family:var(--mono)}
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:11px 22px;display:flex;justify-content:space-between;gap:14px}
+.mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+header.hero{padding:54px 0 0}.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+h1{font-size:clamp(30px,4.8vw,46px);line-height:1.07;letter-spacing:-.03em;font-weight:800;margin:15px 0 0;max-width:22ch;text-wrap:balance}
+h1 .g{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:18px 0 0;font-size:18px;color:var(--t2);max-width:66ch}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-top:30px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-family:var(--mono);font-size:25px;letter-spacing:-.02em}.kpi span{font-size:12.5px;color:var(--t3);display:block}
+.kpi.ok b{color:var(--ok)}.kpi.bad b{color:var(--bad)}
+section{margin-top:52px}.sec-head{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:baseline;border-top:2px solid var(--t1);padding-top:14px}
+@media(max-width:720px){.sec-head{grid-template-columns:1fr;gap:4px}}
+.sec-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+h2{font-size:clamp(21px,2.6vw,27px);line-height:1.2;letter-spacing:-.022em;font-weight:720;margin:0;text-wrap:balance}
+h3{font-size:17.5px;font-weight:700;margin:28px 0 8px}p{margin:14px 0;max-width:70ch}
+.scroller{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:660px}
+th,td{text-align:right;padding:11px 13px;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}tbody tr:last-child td{border-bottom:0}
+thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);font-weight:500;background:var(--surface-2)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.best td{background:color-mix(in srgb,var(--ok) 10%,transparent)}tr.worst td{background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.callout{margin-top:26px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow)}
+.callout.green{border-left-color:var(--ok)}.callout.red{border-left-color:var(--bad)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+ul{margin:12px 0;padding-left:20px;max-width:70ch}li{margin:8px 0;color:var(--t2)}li b{color:var(--t1)}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--border);font-size:13px;color:var(--t3)}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;font-weight:500}
+.t-off{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}.t-up{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.t-on{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}.t-keep{background:var(--surface-2);color:var(--t2)}.t-wait{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+td.why{white-space:normal;text-align:left;color:var(--t2);font-size:13.5px;min-width:260px}.muted{color:var(--t3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}.card h3{margin:0 0 6px}
+.card p{margin:6px 0;font-size:15px;color:var(--t2)}.big{font-family:var(--mono);font-size:28px;font-weight:500;letter-spacing:-.02em}
+ol{max-width:72ch;padding-left:22px}ol li{margin:10px 0;color:var(--t2)}ol li b{color:var(--t1)}
+</style></head><body>
+<div class="topbar"><div class="topbar-in"><span class="mark">Razgovor.uz · разбор продаж</span><span class="mark">08.10.2026</span></div></div>
+<div class="wrap">
+<header class="hero">
+<div class="eyebrow">Таргет · формы · креативы · отдел продаж</div>
+<h1>Лидов стало <span class="g">вдвое больше</span>, а оплат не прибавилось</h1>
+<p class="lede">Реклама в октябре даёт больше лидов, чем когда-либо, и не дороже прежнего. Падает то, что происходит после заявки: поток уходит менеджерам, которые не продают, а каждый пятый лид этой недели ещё никто не взял в работу.</p>
+<div class="kpis">
+<div class="kpi"><b>~320</b><span>лидов в день с 24.09 (было ~150)</span></div>
+<div class="kpi"><b>6–7</b><span>оплат в день, как и раньше</span></div>
+<div class="kpi bad"><b>2,6% → 1,8%</b><span>оплата за 7 дней, когорты 21.09 и 28.09</span></div>
+<div class="kpi bad"><b>371</b><span>лид в «Yangi lid» дольше суток</span></div>
+<div class="kpi ok"><b>71%</b><span>продаж делают 7 менеджеров из 28</span></div>
+</div>
+</header>
+
+<section>
+<div class="sec-head"><span class="sec-num">01 · Деньги</span><h2>Что на самом деле упало</h2></div>
+<p>По оплатам за неделю провал заметен: 62 в неделю с 21.09, 50 в неделю с 28.09, около 42 в неделю в темпе октября. При этом за 1–7 октября 40 оплат на 114 млн сум, больше, чем за первую неделю июля, августа и сентября (36–45 оплат, 92–99 млн). Падение относительное: <b>лидов стало вдвое больше, а оплаты остались на прежнем уровне</b>.</p>
+<div class="scroller"><table>
+<thead><tr><th>Неделя</th><th>Расход</th><th>Лиды FB</th><th>CPL</th><th>Лиды Bitrix</th><th>Оплаты</th><th>Выручка, млн</th></tr></thead>
+<tbody>
+<tr><td>31.08</td><td class="num">$1 219</td><td class="num">1 589</td><td class="num">$0.77</td><td class="num">1 644</td><td class="num">41</td><td class="num">89</td></tr>
+<tr><td>07.09</td><td class="num">$782</td><td class="num">1 113</td><td class="num">$0.70</td><td class="num">1 111</td><td class="num">50</td><td class="num">115</td></tr>
+<tr><td>14.09</td><td class="num">$1 090</td><td class="num">1 208</td><td class="num">$0.90</td><td class="num">1 225</td><td class="num">34</td><td class="num">77</td></tr>
+<tr class="best"><td>21.09</td><td class="num">$1 312</td><td class="num">1 674</td><td class="num">$0.78</td><td class="num">1 672</td><td class="num">62</td><td class="num">147</td></tr>
+<tr><td>28.09</td><td class="num">$1 616</td><td class="num">1 975</td><td class="num">$0.82</td><td class="num">1 978</td><td class="num">50</td><td class="num">135</td></tr>
+<tr class="worst"><td>05.10 (4 дня)</td><td class="num">$915</td><td class="num">1 228</td><td class="num">$0.75</td><td class="num">1 293</td><td class="num">20</td><td class="num">54</td></tr>
+</tbody></table></div>
+<p class="muted">Оплаты — стадия «100% To'lov» по дате закрытия. HR-кампании из расхода исключены. 82% оплат закрываются в первые 7 дней после заявки, медиана — 1 день.</p>
+<div class="callout red"><p><b>Вывод.</b> Реклама не просела: CPL в октябре $0.75–0.82, как в сентябре. Лидов из рекламы вдвое больше, а продажи остались на прежнем уровне. Проблема в обработке лидов.</p></div>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">02 · Отдел продаж</span><h2>Поток уходит тем, кто не продаёт</h2></div>
+<p>Когорта лидов 14–30 сентября: 3 826 лидов, 98 оплат (2,56%). 7 менеджеров с конверсией от 3% получили 35% лидов и сделали 71% продаж. У остальных лиды почти не превращаются в оплаты.</p>
+<div class="scroller"><table>
+<thead><tr><th>Менеджер (ID Bitrix)</th><th>Лидов</th><th>Оплат</th><th>Конверсия</th><th>В «Sifatsiz»</th><th>Октябрь, лидов в день</th></tr></thead>
+<tbody>
+<tr class="best"><td>553</td><td class="num">197</td><td class="num">14</td><td class="num">7,1%</td><td class="num">8%</td><td class="num">11</td></tr>
+<tr class="best"><td>486</td><td class="num">140</td><td class="num">10</td><td class="num">7,1%</td><td class="num">26%</td><td class="num">—</td></tr>
+<tr class="best"><td>441</td><td class="num">168</td><td class="num">11</td><td class="num">6,5%</td><td class="num">14%</td><td class="num">16</td></tr>
+<tr class="best"><td>577</td><td class="num">224</td><td class="num">12</td><td class="num">5,4%</td><td class="num">19%</td><td class="num">22</td></tr>
+<tr class="best"><td>517</td><td class="num">148</td><td class="num">7</td><td class="num">4,7%</td><td class="num">8%</td><td class="num">19</td></tr>
+<tr class="best"><td>445</td><td class="num">234</td><td class="num">8</td><td class="num">3,4%</td><td class="num">18%</td><td class="num">17</td></tr>
+<tr class="best"><td>511</td><td class="num">237</td><td class="num">8</td><td class="num">3,4%</td><td class="num">19%</td><td class="num">—</td></tr>
+<tr class="worst"><td>581</td><td class="num">221</td><td class="num">2</td><td class="num">0,9%</td><td class="num">20%</td><td class="num">27 (больше всех)</td></tr>
+<tr class="worst"><td>555</td><td class="num">202</td><td class="num">1</td><td class="num">0,5%</td><td class="num">28%</td><td class="num">19</td></tr>
+<tr class="worst"><td>579</td><td class="num">231</td><td class="num">1</td><td class="num">0,4%</td><td class="num">25%</td><td class="num">17</td></tr>
+<tr class="worst"><td>585</td><td class="num">140</td><td class="num">0</td><td class="num">0%</td><td class="num">46%</td><td class="num">14</td></tr>
+<tr class="worst"><td>587</td><td class="num">98</td><td class="num">0</td><td class="num">0%</td><td class="num">6%</td><td class="num">18</td></tr>
+<tr class="worst"><td>465</td><td class="num">127</td><td class="num">0</td><td class="num">0%</td><td class="num">0%</td><td class="num">112 лидов не открыты</td></tr>
+</tbody></table></div>
+<div class="grid2">
+<div class="card"><h3>Брошенные лиды</h3><div class="big">371</div><p>лид с 20.09 больше суток в «Yangi lid». Больше всего у 517 (49), 581 (41), 347 (38), 591 (34), 465 (31). На этой неделе в «Yangi lid» 20% всех лидов, в начале сентября было 2%.</p></div>
+<div class="card"><h3>Ночной поток</h3><div class="big">35%</div><p>заявок приходит с 22:00 до 08:00 (было 30%). Ночные платят 2,3%, утренние 3,1%. Утром первыми надо обзванивать ночные заявки.</p></div>
+</div>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">03 · Формы</span><h2>Какие формы приводят к оплате</h2></div>
+<p>Заявки из форм за сентябрь сопоставлены с оплатами в Bitrix по телефону, по обоим номерам из формы. Расход взят за то же окно, 1–30 сентября. Всего в сентябре $4 941, 178 оплат, <b>$27.8 за оплату</b>.</p>
+<div class="scroller"><table>
+<thead><tr><th>Форма</th><th>Расход</th><th>Лиды</th><th>Оплат</th><th>Конверсия</th><th>$ за оплату</th><th>Окупаемость</th></tr></thead>
+<tbody>
+<tr class="best"><td>forma 5</td><td class="num">$765</td><td class="num">933</td><td class="num">48</td><td class="num">5,1%</td><td class="num">$15.9</td><td class="num">11,8×</td></tr>
+<tr class="best"><td>Blogger B zahod3</td><td class="num">$58</td><td class="num">133</td><td class="num">6</td><td class="num">4,5%</td><td class="num">$9.7</td><td class="num">29×</td></tr>
+<tr class="best"><td>Blogger C Project24</td><td class="num">$56</td><td class="num">189</td><td class="num">4</td><td class="num">2,1%</td><td class="num">$14.0</td><td class="num">15×</td></tr>
+<tr><td>Sentabr natijalar kanali v2</td><td class="num">$91</td><td class="num">154</td><td class="num">5</td><td class="num">3,3%</td><td class="num">$18.3</td><td class="num">12,5×</td></tr>
+<tr><td>Forma 2</td><td class="num">$296</td><td class="num">363</td><td class="num">12</td><td class="num">3,3%</td><td class="num">$24.7</td><td class="num">7,4×</td></tr>
+<tr><td>Forma 8</td><td class="num">$803</td><td class="num">1 072</td><td class="num">32</td><td class="num">3,0%</td><td class="num">$25.1</td><td class="num">7,2×</td></tr>
+<tr><td>12% iyun</td><td class="num">$349</td><td class="num">238</td><td class="num">11</td><td class="num">4,6%</td><td class="num">$31.7</td><td class="num">7,1×</td></tr>
+<tr><td>Forma 4</td><td class="num">$702</td><td class="num">891</td><td class="num">22</td><td class="num">2,5%</td><td class="num">$31.9</td><td class="num">5,6×</td></tr>
+<tr><td>Forma 20</td><td class="num">$159</td><td class="num">214</td><td class="num">5</td><td class="num">2,3%</td><td class="num">$31.8</td><td class="num">6,3×</td></tr>
+<tr><td>Forma 3</td><td class="num">$181</td><td class="num">196</td><td class="num">5</td><td class="num">2,6%</td><td class="num">$36.3</td><td class="num">4,5×</td></tr>
+<tr class="worst"><td>Sentabr natijalar kanali 16.09</td><td class="num">$478</td><td class="num">578</td><td class="num">10</td><td class="num">1,7%</td><td class="num">$47.8</td><td class="num">4,6×</td></tr>
+<tr class="worst"><td>Avgust yangi kreativ</td><td class="num">$378</td><td class="num">462</td><td class="num">7</td><td class="num">1,5%</td><td class="num">$54.0</td><td class="num">3,2×</td></tr>
+<tr class="worst"><td>Blogger A zahod2</td><td class="num">$57</td><td class="num">150</td><td class="num">1</td><td class="num">0,7%</td><td class="num">$57.2</td><td class="num">4,4×</td></tr>
+<tr class="worst"><td>Forma 1</td><td class="num">$373</td><td class="num">459</td><td class="num">6</td><td class="num">1,3%</td><td class="num">$62.1</td><td class="num">2,7×</td></tr>
+</tbody></table></div>
+<p class="muted">Окупаемость = выручка ÷ расход по курсу 12 500. По блогерским формам и «natijalar v2» выборка мала, по 4–6 оплат, вывод предварительный.</p>
+<div class="callout green"><p><b>Лучшие формы:</b> <b>forma 5</b> (основная рабочая), <b>Blogger B zahod3</b> и <b>Blogger C Project24</b>, затем Forma 2 и Forma 8. <b>Худшие:</b> Forma 1, Blogger A zahod2, «Avgust yangi kreativ» и «Sentabr natijalar kanali 16.09» (с одним телефоном). Новая форма с одним телефоном даёт лиды по той же цене, но до оплаты доходит хуже.</p></div>
+<h3>Что в ответах анкеты предсказывает оплату</h3>
+<ul>
+<li><b>Возраст</b> предсказывает оплату сильнее всех остальных вопросов: 16–18 лет — 0,5%, 18–22 — 2,1%, 22–26 — 2,9%, 26–30 — 3,4%, 30+ — 3,6%. 817 заявок за полтора месяца пришли с ответом «16–18», хотя реклама настроена на 18+.</li>
+<li><b>Два разных номера</b> в форме: 1,6% против 2,9% у заявок с одним номером. Второе поле путает менеджеров и клиента.</li>
+<li>Вопрос «когда начнёте» оплату не предсказывает: везде 2,5–2,8%.</li>
+</ul>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">04 · Креативы</span><h2>Ролики по цене оплаты</h2></div>
+<div class="scroller"><table>
+<thead><tr><th>Ролик</th><th>Расход сент.</th><th>Лиды</th><th>CPL</th><th>Оплат</th><th>$ за оплату</th><th>Октябрь, расход</th></tr></thead>
+<tbody>
+<tr class="best"><td>Blogger B zahod3</td><td class="num">$58</td><td class="num">204</td><td class="num">$0.29</td><td class="num">9</td><td class="num">$6.5</td><td class="num">$76</td></tr>
+<tr class="best"><td>Blogger C Project24</td><td class="num">$56</td><td class="num">263</td><td class="num">$0.21</td><td class="num">5</td><td class="num">$11.2</td><td class="num">$76</td></tr>
+<tr class="best"><td>aprel 5</td><td class="num">$793</td><td class="num">955</td><td class="num">$0.83</td><td class="num">48</td><td class="num">$16.5</td><td class="num">$243</td></tr>
+<tr class="best"><td>sentabr 12</td><td class="num">$48</td><td class="num">61</td><td class="num">$0.79</td><td class="num">3</td><td class="num">$16.1</td><td class="num">$18</td></tr>
+<tr><td>aprel 2</td><td class="num">$312</td><td class="num">379</td><td class="num">$0.82</td><td class="num">12</td><td class="num">$26.0</td><td class="num">$123</td></tr>
+<tr><td>k2 8form</td><td class="num">$1 077</td><td class="num">1 377</td><td class="num">$0.78</td><td class="num">38</td><td class="num">$28.3</td><td class="num">$187</td></tr>
+<tr><td>iyun new c4</td><td class="num">$349</td><td class="num">238</td><td class="num">$1.47</td><td class="num">11</td><td class="num">$31.7</td><td class="num">$213</td></tr>
+<tr><td>aprel 4</td><td class="num">$702</td><td class="num">891</td><td class="num">$0.79</td><td class="num">22</td><td class="num">$31.9</td><td class="num">$314</td></tr>
+<tr class="worst"><td>aprel 1</td><td class="num">$317</td><td class="num">378</td><td class="num">$0.84</td><td class="num">6</td><td class="num">$52.8</td><td class="num">$106</td></tr>
+<tr class="worst"><td>Blogger A zahod2</td><td class="num">$57</td><td class="num">203</td><td class="num">$0.28</td><td class="num">1</td><td class="num">$57.2</td><td class="num">$76</td></tr>
+<tr class="worst"><td>avgust t2</td><td class="num">$373</td><td class="num">452</td><td class="num">$0.83</td><td class="num">6</td><td class="num">$62.2</td><td class="num">выключен</td></tr>
+<tr class="worst"><td>sentabr 5</td><td class="num">$161</td><td class="num">205</td><td class="num">$0.79</td><td class="num">2</td><td class="num">$80.5</td><td class="num">$189 (больше всех)</td></tr>
+</tbody></table></div>
+<div class="callout red"><p><b>CPL не показывает, сколько стоит клиент.</b> У sentabr 5 и aprel 5 лид стоит одинаково, по $0.8, а оплата отличается в 5 раз: $80 против $16. При этом в октябре sentabr 5 получил больше всего денег во всём кабинете. Meta распределяет бюджет по цене лида, поэтому ролики, которые не продают, приходится выключать вручную.</p></div>
+<p>Тест 7 новых роликов (с 06.10, по $5): IMG_7427 даёт лид по $0.25, IMG_7452, IMG_7432 и oct4 — по $0.6–0.7, oct5 и oct6 пока дорогие. Оценку по оплатам сделаю около 16.10.</p>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">05 · План</span><h2>Что сделать</h2></div>
+<h3>Отдел продаж: здесь основной рост</h3>
+<ol>
+<li><b>Распределение по результату.</b> Новые лиды отдавать в первую очередь 553, 486, 441, 577, 517, 445, 511. Менеджерам с конверсией ниже 1% (581, 555, 579, 585, 587) урезать поток вдвое, пока не подтянут конверсию. Если сильные менеджеры получат на 30% больше лидов, при их конверсии это 25–40 оплат в месяц сверху, или 60–100 млн сум.</li>
+<li><b>Разобрать 371 брошенный лид сегодня.</b> Менеджеров 465 и 347 снять с потока, пока у них не обработаны старые лиды.</li>
+<li><b>Правило: лид в «Yangi lid» больше часа — РОП передаёт его другому менеджеру.</b> Утром первыми обзванивать ночные заявки, это 35% потока.</li>
+<li><b>Возраст 16–18 отдавать в последнюю очередь</b>, поле «Yoshi» с 06.10 заполняется у всех лидов, по нему можно фильтровать.</li>
+</ol>
+<h3>Реклама</h3>
+<ol>
+<li><b>Оплатить кабинет.</b> Статус 9, долг $928. В таком статусе Meta урезает показы.</li>
+<li><span class="tag t-off">выкл</span> <b>sentabr 5</b> ($80 за оплату), <b>aprel 1</b> во всех 4 группах ($53), группа <b>Blogger A zahod2</b> ($57, конверсия 0,7%).</li>
+<li><span class="tag t-up">+20%</span> <b>Blogger B zahod3</b>: $10 → $12. <b>aprel 5</b> в «Iyun sotuv · uzb broad»: $11 → $13. Больше чем на 20% за раз не поднимать, иначе слетает обучение.</li>
+<li><b>Новые объявления ставить на forma 5</b>, а не на форму с одним телефоном. Тест форм «AB eski / yangi forma» подводим ~12.10, когда дозреют оплаты.</li>
+<li><b>В следующей версии формы:</b> убрать вариант «16–18» и второй телефон, остальные вопросы оставить.</li>
+</ol>
+<div class="callout"><p><b>Изменения в кабинете ждут подтверждения.</b> Пауза sentabr 5, aprel 1, Blogger A и подъём бюджетов Blogger B и aprel 5 подготовлены, но ещё не применены.</p></div>
+<h3>Уже сделано на этой неделе</h3>
+<ul>
+<li><b>06.10 — возраст в Bitrix.</b> 998 лидов формы «natijalar v2» пришли без возраста. Ответы анкеты дописаны во все, новые лиды теперь приходят с возрастом, свип работает раз в 15 минут.</li>
+<li><b>06.10 — тест 7 новых роликов</b>, у каждого своя группа по $5.</li>
+<li><b>06.10 — найм:</b> учитель и продажник на квизы, квизы переписаны под новый офис на Мирзо-Улугбеке.</li>
+</ul>
+</section>
+
+<footer>Данные: Facebook Ads API (кабинет act_403420199066924) и Bitrix24 на 08.10.2026, 19:00. Оплаты привязаны к заявкам по телефону. Конверсии считаются по заявкам старше 7 дней. HR-кампании исключены.</footer>
+</div></body></html>
