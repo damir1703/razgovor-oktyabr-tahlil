@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Razgovor · sotuv tahlili</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--surface:#fff;--surface-2:#EDECE6;--border:#DBD9D1;--line-2:#C7C4BA;
+--t1:#141817;--t2:#47504E;--t3:#77807D;--accent:#7C3AED;--accent-2:#A855F7;
+--ok:#0FA968;--warn:#E5920B;--bad:#E5484D;--shadow:0 2px 10px rgba(60,50,40,.05);--r:20px;
+--sans:"Manrope",ui-sans-serif,system-ui,sans-serif;--mono:"DM Mono",ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121514;--surface:#191D1C;--surface-2:#212625;
+--border:#2A302F;--line-2:#3A423F;--t1:#ECECE7;--t2:#B0B8B6;--t3:#828B88;--accent:#A78BFA;--accent-2:#C4B5FD;
+--ok:#3ECF8E;--warn:#F2B23E;--bad:#F26D71;--shadow:0 2px 12px rgba(0,0,0,.3)}}
+:root[data-theme="dark"]{--bg:#121514;--surface:#191D1C;--surface-2:#212625;--border:#2A302F;--line-2:#3A423F;
+--t1:#ECECE7;--t2:#B0B8B6;--t3:#828B88;--accent:#A78BFA;--accent-2:#C4B5FD;--ok:#3ECF8E;--warn:#F2B23E;--bad:#F26D71}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16.5px;line-height:1.62}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px 90px}.mono{font-family:var(--mono)}
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.topbar-in{max-width:1040px;margin:0 auto;padding:11px 22px;display:flex;justify-content:space-between;gap:14px}
+.mark{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+header.hero{padding:54px 0 0}.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+h1{font-size:clamp(30px,4.8vw,46px);line-height:1.07;letter-spacing:-.03em;font-weight:800;margin:15px 0 0;max-width:22ch;text-wrap:balance}
+h1 .g{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:18px 0 0;font-size:18px;color:var(--t2);max-width:66ch}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-top:30px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-family:var(--mono);font-size:25px;letter-spacing:-.02em}.kpi span{font-size:12.5px;color:var(--t3);display:block}
+.kpi.ok b{color:var(--ok)}.kpi.bad b{color:var(--bad)}
+section{margin-top:52px}.sec-head{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:baseline;border-top:2px solid var(--t1);padding-top:14px}
+@media(max-width:720px){.sec-head{grid-template-columns:1fr;gap:4px}}
+.sec-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+h2{font-size:clamp(21px,2.6vw,27px);line-height:1.2;letter-spacing:-.022em;font-weight:720;margin:0;text-wrap:balance}
+h3{font-size:17.5px;font-weight:700;margin:28px 0 8px}p{margin:14px 0;max-width:70ch}
+.scroller{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:660px}
+th,td{text-align:right;padding:11px 13px;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}tbody tr:last-child td{border-bottom:0}
+thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);font-weight:500;background:var(--surface-2)}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.best td{background:color-mix(in srgb,var(--ok) 10%,transparent)}tr.worst td{background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.callout{margin-top:26px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow)}
+.callout.green{border-left-color:var(--ok)}.callout.red{border-left-color:var(--bad)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+ul{margin:12px 0;padding-left:20px;max-width:70ch}li{margin:8px 0;color:var(--t2)}li b{color:var(--t1)}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--border);font-size:13px;color:var(--t3)}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:99px;font-weight:500}
+.t-off{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}.t-up{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.t-on{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}.t-keep{background:var(--surface-2);color:var(--t2)}.t-wait{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+td.why{white-space:normal;text-align:left;color:var(--t2);font-size:13.5px;min-width:260px}.muted{color:var(--t3)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}.card h3{margin:0 0 6px}
+.card p{margin:6px 0;font-size:15px;color:var(--t2)}.big{font-family:var(--mono);font-size:28px;font-weight:500;letter-spacing:-.02em}
+ol{max-width:72ch;padding-left:22px}ol li{margin:10px 0;color:var(--t2)}ol li b{color:var(--t1)}
+</style></head><body>
+<div class="topbar"><div class="topbar-in"><span class="mark">Razgovor.uz · sotuv tahlili</span><span class="mark"><a href="./" style="color:inherit">RU</a> · UZ · 08.10.2026</span></div></div>
+<div class="wrap">
+<header class="hero">
+<div class="eyebrow">Target · formalar · kreativlar · sotuv bo'limi</div>
+<h1>Lidlar <span class="g">ikki baravar ko'paydi</span>, to'lovlar esa ko'paymadi</h1>
+<p class="lede">Oktabrda reklama har qachongidan ko'p lid bermoqda va lid narxi oshmagan. Muammo arizadan keyingi bosqichda: oqim sotmaydigan menejerlarga ketyapti, bu haftadagi har beshinchi lidni esa hali hech kim ishga olmagan.</p>
+<div class="kpis">
+<div class="kpi"><b>~320</b><span>24.09 dan beri kuniga lid (avval ~150)</span></div>
+<div class="kpi"><b>6–7</b><span>kuniga to'lov, avvalgidek</span></div>
+<div class="kpi bad"><b>2,6% → 1,8%</b><span>7 kun ichida to'lov, 21.09 va 28.09 kogortalari</span></div>
+<div class="kpi bad"><b>371</b><span>lid bir sutkadan ko'p «Yangi lid»da</span></div>
+<div class="kpi ok"><b>71%</b><span>sotuvni 28 menejerdan 7 tasi qiladi</span></div>
+</div>
+</header>
+
+<section>
+<div class="sec-head"><span class="sec-num">01 · Pul</span><h2>Aslida nima tushib ketdi</h2></div>
+<p>Haftalik to'lovlarda pasayish ko'rinadi: 21.09 dan haftasiga 62 ta, 28.09 dan 50 ta, oktabr sur'atida haftasiga taxminan 42 ta. Shu bilan birga 1–7 oktabrda 114 mln so'mlik 40 ta to'lov bo'ldi, bu iyul, avgust va sentabrning birinchi haftasidan ko'p (36–45 ta to'lov, 92–99 mln). Pasayish nisbiy: <b>lidlar ikki baravar ko'paydi, to'lovlar esa avvalgi darajada qoldi</b>.</p>
+<div class="scroller"><table>
+<thead><tr><th>Hafta</th><th>Xarajat</th><th>FB lidlar</th><th>CPL</th><th>Bitrix lidlar</th><th>To'lovlar</th><th>Tushum, mln</th></tr></thead>
+<tbody>
+<tr><td>31.08</td><td class="num">$1 219</td><td class="num">1 589</td><td class="num">$0.77</td><td class="num">1 644</td><td class="num">41</td><td class="num">89</td></tr>
+<tr><td>07.09</td><td class="num">$782</td><td class="num">1 113</td><td class="num">$0.70</td><td class="num">1 111</td><td class="num">50</td><td class="num">115</td></tr>
+<tr><td>14.09</td><td class="num">$1 090</td><td class="num">1 208</td><td class="num">$0.90</td><td class="num">1 225</td><td class="num">34</td><td class="num">77</td></tr>
+<tr class="best"><td>21.09</td><td class="num">$1 312</td><td class="num">1 674</td><td class="num">$0.78</td><td class="num">1 672</td><td class="num">62</td><td class="num">147</td></tr>
+<tr><td>28.09</td><td class="num">$1 616</td><td class="num">1 975</td><td class="num">$0.82</td><td class="num">1 978</td><td class="num">50</td><td class="num">135</td></tr>
+<tr class="worst"><td>05.10 (4 kun)</td><td class="num">$915</td><td class="num">1 228</td><td class="num">$0.75</td><td class="num">1 293</td><td class="num">20</td><td class="num">54</td></tr>
+</tbody></table></div>
+<p class="muted">To'lovlar — «100% To'lov» bosqichi, yopilgan sana bo'yicha. HR kampaniyalari xarajatdan chiqarilgan. To'lovlarning 82% ariza tushgandan keyin birinchi 7 kunda yopiladi, mediana — 1 kun.</p>
+<div class="callout red"><p><b>Xulosa.</b> Reklama pasaymagan: oktabrda CPL $0.75–0.82, sentabrdagidek. Reklamadan lid ikki baravar ko'p, sotuv esa avvalgi darajada qoldi. Muammo lidlarni qayta ishlashda.</p></div>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">02 · Sotuv bo'limi</span><h2>Oqim sotmaydiganlarga ketyapti</h2></div>
+<p>14–30 sentabr lidlari kogortasi: 3 826 lid, 98 ta to'lov (2,56%). Konversiyasi 3% dan yuqori 7 menejer lidlarning 35% ini oldi va sotuvning 71% ini qildi. Qolganlarda lidlar deyarli to'lovga aylanmaydi.</p>
+<div class="scroller"><table>
+<thead><tr><th>Menejer (Bitrix ID)</th><th>Lidlar</th><th>To'lovlar</th><th>Konversiya</th><th>«Sifatsiz»ga</th><th>Oktabr, kuniga lid</th></tr></thead>
+<tbody>
+<tr class="best"><td>553</td><td class="num">197</td><td class="num">14</td><td class="num">7,1%</td><td class="num">8%</td><td class="num">11</td></tr>
+<tr class="best"><td>486</td><td class="num">140</td><td class="num">10</td><td class="num">7,1%</td><td class="num">26%</td><td class="num">—</td></tr>
+<tr class="best"><td>441</td><td class="num">168</td><td class="num">11</td><td class="num">6,5%</td><td class="num">14%</td><td class="num">16</td></tr>
+<tr class="best"><td>577</td><td class="num">224</td><td class="num">12</td><td class="num">5,4%</td><td class="num">19%</td><td class="num">22</td></tr>
+<tr class="best"><td>517</td><td class="num">148</td><td class="num">7</td><td class="num">4,7%</td><td class="num">8%</td><td class="num">19</td></tr>
+<tr class="best"><td>445</td><td class="num">234</td><td class="num">8</td><td class="num">3,4%</td><td class="num">18%</td><td class="num">17</td></tr>
+<tr class="best"><td>511</td><td class="num">237</td><td class="num">8</td><td class="num">3,4%</td><td class="num">19%</td><td class="num">—</td></tr>
+<tr class="worst"><td>581</td><td class="num">221</td><td class="num">2</td><td class="num">0,9%</td><td class="num">20%</td><td class="num">27 (eng ko'p)</td></tr>
+<tr class="worst"><td>555</td><td class="num">202</td><td class="num">1</td><td class="num">0,5%</td><td class="num">28%</td><td class="num">19</td></tr>
+<tr class="worst"><td>579</td><td class="num">231</td><td class="num">1</td><td class="num">0,4%</td><td class="num">25%</td><td class="num">17</td></tr>
+<tr class="worst"><td>585</td><td class="num">140</td><td class="num">0</td><td class="num">0%</td><td class="num">46%</td><td class="num">14</td></tr>
+<tr class="worst"><td>587</td><td class="num">98</td><td class="num">0</td><td class="num">0%</td><td class="num">6%</td><td class="num">18</td></tr>
+<tr class="worst"><td>465</td><td class="num">127</td><td class="num">0</td><td class="num">0%</td><td class="num">0%</td><td class="num">112 lid ochilmagan</td></tr>
+</tbody></table></div>
+<div class="grid2">
+<div class="card"><h3>Tashlab qo'yilgan lidlar</h3><div class="big">371</div><p>lid 20.09 dan beri bir sutkadan ko'p «Yangi lid»da turibdi. Eng ko'pi 517 (49), 581 (41), 347 (38), 591 (34), 465 (31) da. Bu hafta «Yangi lid»da barcha lidlarning 20% i, sentabr boshida 2% edi.</p></div>
+<div class="card"><h3>Tungi oqim</h3><div class="big">35%</div><p>arizalar 22:00 dan 08:00 gacha keladi (avval 30%). Tungi arizalar 2,3%, ertalabkilar 3,1% to'laydi. Ertalab birinchi bo'lib tungi arizalarga qo'ng'iroq qilish kerak.</p></div>
+</div>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">03 · Formalar</span><h2>Qaysi formalar to'lovga olib keladi</h2></div>
+<p>Sentabrdagi forma arizalari Bitrix'dagi to'lovlar bilan telefon raqami bo'yicha, formadagi ikkala raqam bilan solishtirildi. Xarajat ham shu oraliq, 1–30 sentabr uchun olingan. Sentabrda jami $4 941, 178 ta to'lov, <b>bitta to'lov $27.8</b>.</p>
+<div class="scroller"><table>
+<thead><tr><th>Forma</th><th>Xarajat</th><th>Lidlar</th><th>To'lovlar</th><th>Konversiya</th><th>1 to'lov narxi</th><th>Qoplash</th></tr></thead>
+<tbody>
+<tr class="best"><td>forma 5</td><td class="num">$765</td><td class="num">933</td><td class="num">48</td><td class="num">5,1%</td><td class="num">$15.9</td><td class="num">11,8×</td></tr>
+<tr class="best"><td>Blogger B zahod3</td><td class="num">$58</td><td class="num">133</td><td class="num">6</td><td class="num">4,5%</td><td class="num">$9.7</td><td class="num">29×</td></tr>
+<tr class="best"><td>Blogger C Project24</td><td class="num">$56</td><td class="num">189</td><td class="num">4</td><td class="num">2,1%</td><td class="num">$14.0</td><td class="num">15×</td></tr>
+<tr><td>Sentabr natijalar kanali v2</td><td class="num">$91</td><td class="num">154</td><td class="num">5</td><td class="num">3,3%</td><td class="num">$18.3</td><td class="num">12,5×</td></tr>
+<tr><td>Forma 2</td><td class="num">$296</td><td class="num">363</td><td class="num">12</td><td class="num">3,3%</td><td class="num">$24.7</td><td class="num">7,4×</td></tr>
+<tr><td>Forma 8</td><td class="num">$803</td><td class="num">1 072</td><td class="num">32</td><td class="num">3,0%</td><td class="num">$25.1</td><td class="num">7,2×</td></tr>
+<tr><td>12% iyun</td><td class="num">$349</td><td class="num">238</td><td class="num">11</td><td class="num">4,6%</td><td class="num">$31.7</td><td class="num">7,1×</td></tr>
+<tr><td>Forma 4</td><td class="num">$702</td><td class="num">891</td><td class="num">22</td><td class="num">2,5%</td><td class="num">$31.9</td><td class="num">5,6×</td></tr>
+<tr><td>Forma 20</td><td class="num">$159</td><td class="num">214</td><td class="num">5</td><td class="num">2,3%</td><td class="num">$31.8</td><td class="num">6,3×</td></tr>
+<tr><td>Forma 3</td><td class="num">$181</td><td class="num">196</td><td class="num">5</td><td class="num">2,6%</td><td class="num">$36.3</td><td class="num">4,5×</td></tr>
+<tr class="worst"><td>Sentabr natijalar kanali 16.09</td><td class="num">$478</td><td class="num">578</td><td class="num">10</td><td class="num">1,7%</td><td class="num">$47.8</td><td class="num">4,6×</td></tr>
+<tr class="worst"><td>Avgust yangi kreativ</td><td class="num">$378</td><td class="num">462</td><td class="num">7</td><td class="num">1,5%</td><td class="num">$54.0</td><td class="num">3,2×</td></tr>
+<tr class="worst"><td>Blogger A zahod2</td><td class="num">$57</td><td class="num">150</td><td class="num">1</td><td class="num">0,7%</td><td class="num">$57.2</td><td class="num">4,4×</td></tr>
+<tr class="worst"><td>Forma 1</td><td class="num">$373</td><td class="num">459</td><td class="num">6</td><td class="num">1,3%</td><td class="num">$62.1</td><td class="num">2,7×</td></tr>
+</tbody></table></div>
+<p class="muted">Qoplash = tushum ÷ xarajat, kurs 12 500. Bloger formalari va «natijalar v2» bo'yicha tanlov kichik, har biri 4–6 to'lov, xulosa dastlabki.</p>
+<div class="callout green"><p><b>Eng yaxshi formalar:</b> <b>forma 5</b> (asosiy ishchi forma), <b>Blogger B zahod3</b> va <b>Blogger C Project24</b>, keyin Forma 2 va Forma 8. <b>Eng yomonlari:</b> Forma 1, Blogger A zahod2, «Avgust yangi kreativ» va «Sentabr natijalar kanali 16.09» (bitta telefonli). Bitta telefonli yangi forma lidni xuddi shu narxda beradi, lekin to'lovgacha yomonroq yetib boradi.</p></div>
+<h3>Anketadagi qaysi javob to'lovni oldindan ko'rsatadi</h3>
+<ul>
+<li><b>Yosh</b> to'lovni boshqa savollarga qaraganda kuchliroq ko'rsatadi: 16–18 yosh — 0,5%, 18–22 — 2,1%, 22–26 — 2,9%, 26–30 — 3,4%, 30+ — 3,6%. Bir yarim oyda 817 ta ariza «16–18» javobi bilan kelgan, garchi reklama 18+ ga sozlangan bo'lsa ham.</li>
+<li>Formadagi <b>ikki xil raqam</b>: bitta raqamli arizalarda 2,9%, ikki xil raqamlilarda 1,6%. Ikkinchi maydon menejerni ham, mijozni ham chalg'itadi.</li>
+<li>«Qachon boshlaysiz» savoli to'lovni oldindan ko'rsatmaydi: hamma javobda 2,5–2,8%.</li>
+</ul>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">04 · Kreativlar</span><h2>Roliklar to'lov narxi bo'yicha</h2></div>
+<div class="scroller"><table>
+<thead><tr><th>Rolik</th><th>Sentabr xarajati</th><th>Lidlar</th><th>CPL</th><th>To'lovlar</th><th>1 to'lov narxi</th><th>Oktabr xarajati</th></tr></thead>
+<tbody>
+<tr class="best"><td>Blogger B zahod3</td><td class="num">$58</td><td class="num">204</td><td class="num">$0.29</td><td class="num">9</td><td class="num">$6.5</td><td class="num">$76</td></tr>
+<tr class="best"><td>Blogger C Project24</td><td class="num">$56</td><td class="num">263</td><td class="num">$0.21</td><td class="num">5</td><td class="num">$11.2</td><td class="num">$76</td></tr>
+<tr class="best"><td>aprel 5</td><td class="num">$793</td><td class="num">955</td><td class="num">$0.83</td><td class="num">48</td><td class="num">$16.5</td><td class="num">$243</td></tr>
+<tr class="best"><td>sentabr 12</td><td class="num">$48</td><td class="num">61</td><td class="num">$0.79</td><td class="num">3</td><td class="num">$16.1</td><td class="num">$18</td></tr>
+<tr><td>aprel 2</td><td class="num">$312</td><td class="num">379</td><td class="num">$0.82</td><td class="num">12</td><td class="num">$26.0</td><td class="num">$123</td></tr>
+<tr><td>k2 8form</td><td class="num">$1 077</td><td class="num">1 377</td><td class="num">$0.78</td><td class="num">38</td><td class="num">$28.3</td><td class="num">$187</td></tr>
+<tr><td>iyun new c4</td><td class="num">$349</td><td class="num">238</td><td class="num">$1.47</td><td class="num">11</td><td class="num">$31.7</td><td class="num">$213</td></tr>
+<tr><td>aprel 4</td><td class="num">$702</td><td class="num">891</td><td class="num">$0.79</td><td class="num">22</td><td class="num">$31.9</td><td class="num">$314</td></tr>
+<tr class="worst"><td>aprel 1</td><td class="num">$317</td><td class="num">378</td><td class="num">$0.84</td><td class="num">6</td><td class="num">$52.8</td><td class="num">$106</td></tr>
+<tr class="worst"><td>Blogger A zahod2</td><td class="num">$57</td><td class="num">203</td><td class="num">$0.28</td><td class="num">1</td><td class="num">$57.2</td><td class="num">$76</td></tr>
+<tr class="worst"><td>avgust t2</td><td class="num">$373</td><td class="num">452</td><td class="num">$0.83</td><td class="num">6</td><td class="num">$62.2</td><td class="num">o'chirilgan</td></tr>
+<tr class="worst"><td>sentabr 5</td><td class="num">$161</td><td class="num">205</td><td class="num">$0.79</td><td class="num">2</td><td class="num">$80.5</td><td class="num">$189 (eng ko'p)</td></tr>
+</tbody></table></div>
+<div class="callout red"><p><b>CPL mijoz qanchaga tushishini ko'rsatmaydi.</b> sentabr 5 va aprel 5 da lid bir xil, $0.8 dan, to'lov esa 5 baravar farq qiladi: $80 ga qarshi $16. Shunga qaramay oktabrda sentabr 5 butun kabinetda eng ko'p pul oldi. Meta byudjetni lid narxi bo'yicha taqsimlaydi, shuning uchun sotmaydigan roliklarni qo'lda o'chirishga to'g'ri keladi.</p></div>
+<p>7 ta yangi rolik testi (06.10 dan, har biri $5): IMG_7427 lidni $0.25 dan beryapti, IMG_7452, IMG_7432 va oct4 — $0.6–0.7 dan, oct5 va oct6 hozircha qimmat. To'lovlar bo'yicha baho taxminan 16.10 da bo'ladi.</p>
+</section>
+
+<section>
+<div class="sec-head"><span class="sec-num">05 · Reja</span><h2>Nima qilish kerak</h2></div>
+<h3>Sotuv bo'limi: asosiy o'sish shu yerda</h3>
+<ol>
+<li><b>Natijaga qarab taqsimlash.</b> Yangi lidlarni birinchi navbatda 553, 486, 441, 577, 517, 445, 511 ga berish. Konversiyasi 1% dan past menejerlarga (581, 555, 579, 585, 587) konversiyasi ko'tarilmaguncha oqimni ikki baravar kamaytirish. Kuchli menejerlar 30% ko'proq lid olsa, ularning konversiyasida bu oyiga qo'shimcha 25–40 ta to'lov, ya'ni 60–100 mln so'm.</li>
+<li><b>371 ta tashlab qo'yilgan lidni bugun ko'rib chiqish.</b> 465 va 347 menejerlarni eski lidlari qayta ishlanmaguncha oqimdan olib turish.</li>
+<li><b>Qoida: lid «Yangi lid»da bir soatdan ko'p tursa — ROP uni boshqa menejerga beradi.</b> Ertalab birinchi bo'lib tungi arizalarga qo'ng'iroq qilish, bu oqimning 35% i.</li>
+<li><b>16–18 yoshdagilarni oxirgi navbatda ishlash.</b> 06.10 dan «Yoshi» maydoni barcha lidlarda to'ldiriladi, u bo'yicha filtrlash mumkin.</li>
+</ol>
+<h3>Reklama</h3>
+<ol>
+<li><b>Kabinetni to'lash.</b> Status 9, qarz $928. Bu statusda Meta ko'rsatishlarni qisqartiradi.</li>
+<li><span class="tag t-off">o'chirish</span> <b>sentabr 5</b> (to'lov $80), <b>aprel 1</b> 4 ta guruhning hammasida ($53), <b>Blogger A zahod2</b> guruhi ($57, konversiya 0,7%).</li>
+<li><span class="tag t-up">+20%</span> <b>Blogger B zahod3</b>: $10 → $12. «Iyun sotuv · uzb broad»dagi <b>aprel 5</b>: $11 → $13. Bir martada 20% dan ko'p oshirmaslik, aks holda o'rganish (learning) buziladi.</li>
+<li><b>Yangi e'lonlarni bitta telefonli formaga emas, forma 5 ga qo'yish.</b> «AB eski / yangi forma» testining xulosasini to'lovlar yetilganda, ~12.10 da chiqaramiz.</li>
+<li><b>Formaning keyingi versiyasida:</b> «16–18» variantini va ikkinchi telefonni olib tashlash, qolgan savollarni qoldirish.</li>
+</ol>
+<div class="callout"><p><b>Kabinetdagi o'zgarishlar tasdiqni kutmoqda.</b> sentabr 5, aprel 1, Blogger A ni to'xtatish va Blogger B hamda aprel 5 byudjetini oshirish tayyorlangan, lekin hali qo'llanmagan.</p></div>
+<h3>Bu hafta allaqachon qilingan</h3>
+<ul>
+<li><b>06.10 — Bitrix'da yosh.</b> «natijalar v2» formasidan 998 ta lid yoshsiz kelgan edi. Anketa javoblari hammasiga yozildi, yangi lidlar endi yoshi bilan keladi, svip har 15 daqiqada ishlaydi.</li>
+<li><b>06.10 — 7 ta yangi rolik testi</b>, har birining o'z guruhi, $5 dan.</li>
+<li><b>06.10 — ishga olish:</b> o'qituvchi va sotuvchi kvizlarga, kvizlar Mirzo-Ulug'bekdagi yangi ofisga moslab qayta yozildi.</li>
+</ul>
+</section>
+
+<footer>Ma'lumotlar: Facebook Ads API (act_403420199066924 kabineti) va Bitrix24, 08.10.2026, 19:00 holatiga. To'lovlar arizalarga telefon raqami bo'yicha bog'langan. Konversiyalar 7 kundan katta arizalar bo'yicha hisoblangan. HR kampaniyalari chiqarilgan.</footer>
+</div></body></html>
